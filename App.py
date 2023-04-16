@@ -5,7 +5,7 @@ import pickle
 #from sklearn.model_selection import train_test_split
 
 
-ds = pd.read_csv('r''https://raw.githubusercontent.com/SYEDABUTHAHIRM102/Diabetes-Prediction/main/Data/diabetes%20dataset.csv')
+ds = pd.read_csv('https://raw.githubusercontent.com/SYEDABUTHAHIRM102/Diabetes-Prediction/main/Data/diabetes%20dataset.csv')
 dtree_model = pickle.load(open('Models/Decision Tree.sav', 'rb'))
 knn_model = pickle.load(open('Models/KNN.sav', 'rb'))
 lsvm_model = pickle.load(open('Models/Linear SVM.sav', 'rb'))
