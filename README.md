@@ -1,1 +1,1 @@
-# SATH
+# Diabetes Prediction
