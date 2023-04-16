@@ -6,7 +6,7 @@ import pickle
 
 
 ds = pd.read_csv('https://raw.githubusercontent.com/SYEDABUTHAHIRM102/Diabetes-Prediction/main/Data/diabetes%20dataset.csv')
-dtree_model = pickle.load(open('Models/Decision Tree.sav', 'rb'))
+dtree_model = pickle.load(open('https://github.com/SYEDABUTHAHIRM102/Diabetes-Prediction/blob/main/Models/Decision%20Tree.sav', 'rb'))
 knn_model = pickle.load(open('Models/KNN.sav', 'rb'))
 lsvm_model = pickle.load(open('Models/Linear SVM.sav', 'rb'))
 lr_model = pickle.load(open('Models/Logistic Regression.sav', 'rb'))
