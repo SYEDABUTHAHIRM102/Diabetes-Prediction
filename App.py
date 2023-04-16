@@ -6,12 +6,12 @@ import pickle
 
 
 ds = pd.read_csv('r''https://raw.githubusercontent.com/SYEDABUTHAHIRM102/Diabetes-Prediction/main/Data/diabetes%20dataset.csv')
-dtree_model = pickle.load(open('D:\project\Decision Tree.sav', 'rb'))
-knn_model = pickle.load(open('D:\project\KNN.sav', 'rb'))
-lsvm_model = pickle.load(open('D:\project\Linear SVM.sav', 'rb'))
-lr_model = pickle.load(open('D:\project\Logistic Regression.sav', 'rb'))
-nb_model = pickle.load(open('D:\project\_Naive Bayes.sav', 'rb'))
-rfor_model = pickle.load(open('D:\project\Random Forest.sav', 'rb'))
+dtree_model = pickle.load(open('Models/Decision Tree.sav', 'rb'))
+knn_model = pickle.load(open('Models/KNN.sav', 'rb'))
+lsvm_model = pickle.load(open('Models/Linear SVM.sav', 'rb'))
+lr_model = pickle.load(open('Models/Logistic Regression.sav', 'rb'))
+nb_model = pickle.load(open('Models/_Naive Bayes.sav', 'rb'))
+rfor_model = pickle.load(open('Models/Random Forest.sav', 'rb'))
 
 #X = ds.drop(['Result'], axis= 1)
 #Y = ds.iloc[:, -1]
