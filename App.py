@@ -12,6 +12,8 @@ lsvm_model = pickle.load(open('Models/Linear SVM.pkl', 'rb'))
 lr_model = pickle.load(open('Models/Logistic Regression.pkl', 'rb'))
 nb_model = pickle.load(open('Models/_Naive Bayes.pkl', 'rb'))
 rfor_model = pickle.load(open('Models/Random Forest.pkl', 'rb'))
+mlp_model = pickle.load(open('Models/MLP.pkl', 'rb'))
+lmt_model = pickle.load(open('Models/LMT.pkl', 'rb'))
 
 #X = ds.drop(['Result'], axis= 1)
 #Y = ds.iloc[:, -1]
@@ -28,7 +30,9 @@ with st.sidebar:
                                       "Naive Bayes", 
                                       "Support Vector Machine", 
                                       "Random Forest", 
-                                      "Decision Tree", 
+                                      "Decision Tree",
+                                      "Multi Layer Perceptron", 
+                                      "Logistic Model Tree",
                                       "All Algorithms")
                                       )
       
@@ -66,7 +70,7 @@ if(selectbox == 'Home'):
     st.markdown('Machine learning is a method of data analysis that automates analytical model building. It is a branch of artificial intelligence based on the idea that systems can learn from data, identify patterns and make decisions with minimal human intervention.')
 
     st.subheader('About(Project)')
-    st.markdown(' The aim of this project is to develop a system which can perform early prediction of diabetes for a patient with a higher accuracy by combining the results of different machine learning techniques. The algorithms like Naive Bayes, K-Nearest Neighbor, Logistic Regression, Random Forest, Support Vector Machine and Decision Tree are used.')
+    st.markdown(' The aim of this project is to develop a system which can perform early prediction of diabetes for a patient with a higher accuracy by combining the results of different machine learning techniques. The algorithms like Naive Bayes, K-Nearest Neighbor, Logistic Regression, Random Forest, Support Vector Machine, Decision Tree, Multi Layer Perceptron and Logistic Model Tree are used.')
 
     st.subheader('Data(Training)')
     st.write(ds.describe())
@@ -474,7 +478,138 @@ if(selectbox == 'Decision Tree'):
         diabetes_diagnosis0='The Person is Diabetic'  
         
         st.success(diabetes_diagnosis0)
+        
+        
+if(selectbox == 'Multi Layer Perceptron'):
+    st.sidebar.info('''*Multi Layer Perception is also known as MLP. It is fully connected dense layers, which transform any input dimension to the desired dimension. A multi-layer perception is a neural network that has multiple layers. To create a neural network we combine neurons together so that the outputs of some neurons are inputs of other neurons.*''')
+    st.sidebar.info('''*A Multi Layer Perceptron has one input layer and for each input, there is one neuron(or node), it has one output layer with a single node for each output and it can have any number of hidden layers and each hidden layer can have any number of nodes.*''')
+    #st.sidebar.info('''*It is a graphical representation for getting all the possible solutions to a problem/decision based on given conditions.It is called a decision tree because, similar to a tree, it starts with the root node, which expands on further branches and constructs a tree-like structure.*''')
 
+    st.title('MULTI LAYER PERCEPTRON')
+
+    #dtree_model.fit(X_train, Y_train)
+
+    st.markdown('*Accuracy Score*')
+    
+    #acc5 = (str(accuracy_score(Y_test, dtree_model.predict(X_test))*100)+'%')
+    st.warning(0.787)
+
+    col1, col2, = st.columns(2)
+   
+    with col1:
+      Pregnancies = st.number_input('Number of Pregnancies')
+    with col2:
+      Glucose = st.number_input('Glucose Level')
+    with col1:
+      BP = st.number_input('Blood Pressure value')
+    with col2:
+      SkinThickness = st.number_input('Skin Thickness value')
+    with col1:
+      Insulin = st.number_input('Insulin Level')
+    with col2:
+      BMI = st.number_input('BMI value')
+    with col1:
+      DPF = st.number_input('Diabetes Pedigree Function value')
+    with col2:
+      Age = st.number_input('Age of the Person')
+
+    #Code for prediction
+    
+    Age1=Age+10
+
+    diabetes_diagnosis0 = ''
+    diabetes_diagnosis1 = ''
+
+    diab_prediction = mlp_model.predict([[Pregnancies, Glucose, BP, SkinThickness, Insulin, BMI, DPF, Age]])
+    diab_prediction1 = mlp_model.predict([[Pregnancies, Glucose, BP, SkinThickness, Insulin, BMI, DPF,Age1]])
+
+    #Creating a button for prediction
+  
+    if st.button('Diabetes Test Result'):
+      
+      if (diab_prediction[0]==0):
+        diabetes_diagnosis0 = 'The person is not Diabetic'
+        st.success(diabetes_diagnosis0)
+             
+        if(diab_prediction1[0]==0):          
+          diabetes_diagnosis1= 'Not Possible'
+             
+        else:
+          diabetes_diagnosis1='Possible'
+        #st.markdown(new_title, unsafe_allow_html=True)
+        st.subheader('After 10 Years') 
+        st.metric(label='Now The Age',value=Age1)
+        st.success(diabetes_diagnosis1)
+      else:
+        diabetes_diagnosis0='The Person is Diabetic'  
+        
+        st.success(diabetes_diagnosis0)
+
+if(selectbox == 'Logistic Model Tree'):
+    st.sidebar.info('''*Logistic Model Tree (LMT) is a classification model with an associated supervised training algorithm that combines logistic regression (LR) and decision tree learning.*''')
+    st.sidebar.info('''*Logistic model trees are based on the earlier idea of a model tree: a decision tree that has linear regression models at its leaves to provide a piecewise linear regression model (where ordinary decision trees with constants at their leaves would produce a piecewise constant model). In the logistic variant, the LogitBoost algorithm is used to produce an LR model at every node in the tree; the node is then split using the C4.5 criterion. Each LogitBoost invocation is warm-started[vague] from its results in the parent node. Finally, the tree is pruned.*''')
+    #st.sidebar.info('''*The basic LMT induction algorithm uses cross-validation to find a number of LogitBoost iterations that does not overfit the training data. A faster version has been proposed that uses the Akaike information criterion to control LogitBoost stopping.*''')
+
+    st.title('LOGISTIC MODEL TREE')
+
+    #dtree_model.fit(X_train, Y_train)
+
+    st.markdown('*Accuracy Score*')
+    
+    #acc5 = (str(accuracy_score(Y_test, dtree_model.predict(X_test))*100)+'%')
+    st.warning(0.736)
+
+    col1, col2, = st.columns(2)
+   
+    with col1:
+      Pregnancies = st.number_input('Number of Pregnancies')
+    with col2:
+      Glucose = st.number_input('Glucose Level')
+    with col1:
+      BP = st.number_input('Blood Pressure value')
+    with col2:
+      SkinThickness = st.number_input('Skin Thickness value')
+    with col1:
+      Insulin = st.number_input('Insulin Level')
+    with col2:
+      BMI = st.number_input('BMI value')
+    with col1:
+      DPF = st.number_input('Diabetes Pedigree Function value')
+    with col2:
+      Age = st.number_input('Age of the Person')
+
+    #Code for prediction
+    
+    Age1=Age+10
+
+    diabetes_diagnosis0 = ''
+    diabetes_diagnosis1 = ''
+
+    diab_prediction = lmt_model.predict([[Pregnancies, Glucose, BP, SkinThickness, Insulin, BMI, DPF, Age]])
+    diab_prediction1 = lmt_model.predict([[Pregnancies, Glucose, BP, SkinThickness, Insulin, BMI, DPF,Age1]])
+
+    #Creating a button for prediction
+  
+    if st.button('Diabetes Test Result'):
+      
+      if (diab_prediction[0]==0):
+        diabetes_diagnosis0 = 'The person is not Diabetic'
+        st.success(diabetes_diagnosis0)
+             
+        if(diab_prediction1[0]==0):          
+          diabetes_diagnosis1= 'Not Possible'
+             
+        else:
+          diabetes_diagnosis1='Possible'
+        #st.markdown(new_title, unsafe_allow_html=True)
+        st.subheader('After 10 Years') 
+        st.metric(label='Now The Age',value=Age1)
+        st.success(diabetes_diagnosis1)
+      else:
+        diabetes_diagnosis0='The Person is Diabetic'  
+        
+        st.success(diabetes_diagnosis0)                
+        
 
 if (selectbox == 'All Algorithms'):
 
@@ -485,6 +620,8 @@ if (selectbox == 'All Algorithms'):
   st.sidebar.info('''*Support Vector Machine*''')
   st.sidebar.info('''*Random Forest*''')
   st.sidebar.info('''*Decision Tree*''')
+  st.sidebar.info('''*Multi Layer Perceptron*''')
+  st.sidebar.info('''*Logistic Model Tree*''')
 
   st.title('ALL ALGORITHMS')
 
@@ -523,8 +660,12 @@ if (selectbox == 'All Algorithms'):
   diabetes_diagnosis9 = ''
   diabetes_diagnosis10 = ''
   diabetes_diagnosis11 = ''
+  diabetes_diagnosis12 = ''
+  diabetes_diagnosis13 = ''
+  diabetes_diagnosis14 = ''
+  diabetes_diagnosis15 = ''
 
-
+    
   diab_prediction0 = lr_model.predict([[Pregnancies, Glucose, BP, SkinThickness, Insulin, BMI, DPF, Age]])
   diab_prediction1 = lr_model.predict([[Pregnancies, Glucose, BP, SkinThickness, Insulin, BMI, DPF,Age1]])
   diab_prediction2 = knn_model.predict([[Pregnancies, Glucose, BP, SkinThickness, Insulin, BMI, DPF, Age]])
@@ -537,6 +678,10 @@ if (selectbox == 'All Algorithms'):
   diab_prediction9 = rfor_model.predict([[Pregnancies, Glucose, BP, SkinThickness, Insulin, BMI, DPF,Age1]])
   diab_prediction10 = dtree_model.predict([[Pregnancies, Glucose, BP, SkinThickness, Insulin, BMI, DPF, Age]])
   diab_prediction11 = dtree_model.predict([[Pregnancies, Glucose, BP, SkinThickness, Insulin, BMI, DPF,Age1]])
+  diab_prediction12 = mlp_model.predict([[Pregnancies, Glucose, BP, SkinThickness, Insulin, BMI, DPF, Age]])
+  diab_prediction13 = mlp_model.predict([[Pregnancies, Glucose, BP, SkinThickness, Insulin, BMI, DPF,Age1]])
+  diab_prediction14 = lmt_model.predict([[Pregnancies, Glucose, BP, SkinThickness, Insulin, BMI, DPF, Age]])
+  diab_prediction15 = lmt_model.predict([[Pregnancies, Glucose, BP, SkinThickness, Insulin, BMI, DPF,Age1]])
 
   #Creating a button for prediction
   
@@ -660,9 +805,50 @@ if (selectbox == 'All Algorithms'):
         st.success(diabetes_diagnosis11)
       else:
         diabetes_diagnosis10='The Person is Diabetic'  
-        
+ 
         st.success(diabetes_diagnosis10)
+ 
 
+      st.subheader('Multi Layer Perceptron (0.787)')
+
+      if (diab_prediction12[0]==0):
+        diabetes_diagnosis12 = 'The person is not Diabetic'
+        st.success(diabetes_diagnosis12)
+             
+        if(diab_prediction13[0]==0):          
+          diabetes_diagnosis13= 'Not Possible'
+             
+        else:
+          diabetes_diagnosis13='Possible'
+        #st.markdown(new_title, unsafe_allow_html=True)
+        st.markdown('After 10 Years') 
+        #st.metric(label='Now The Age',value=Age1)
+        st.success(diabetes_diagnosis13)
+      else:
+        diabetes_diagnosis12='The Person is Diabetic'  
+        
+        st.success(diabetes_diagnosis12)
+
+
+      st.subheader('Logistic Model Tree (0.736)')
+
+      if (diab_prediction14[0]==0):
+        diabetes_diagnosis14 = 'The person is not Diabetic'
+        st.success(diabetes_diagnosis14)
+             
+        if(diab_prediction15[0]==0):          
+          diabetes_diagnosis15= 'Not Possible'
+             
+        else:
+          diabetes_diagnosis15='Possible'
+        #st.markdown(new_title, unsafe_allow_html=True)
+        st.markdown('After 10 Years') 
+        #st.metric(label='Now The Age',value=Age1)
+        st.success(diabetes_diagnosis15)
+      else:
+        diabetes_diagnosis14='The Person is Diabetic'  
+        
+        st.success(diabetes_diagnosis14)
 
 
 #completed
