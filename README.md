@@ -2,7 +2,7 @@
 
 8 Algorithms are used 
 
-Back end Mechine Learning (using Visual Studio Code (jupiter))
+Back end Mechine Learning (using Visual Studio Code (jupyter))
 
 Front end (using Streamlit)
 
