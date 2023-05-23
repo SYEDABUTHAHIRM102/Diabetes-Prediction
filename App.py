@@ -61,7 +61,7 @@ if(selectbox == 'Home'):
     st.sidebar.info('''*3 Reinforcement Learning*''')
     st.sidebar.info('''*In Reinforcement learning, an agent interacts with its environment by producing actions, and learn with the help of feedback. The feedback is given to the agent in the form of rewards, such as for each good action, he gets a positive reward, and for each bad action, he gets a negative reward. There is no supervision provided to the agent. Q-Learning algorithm is used in reinforcement learning.*''') 
 
-    st.title("DIABETES PREDICTION")
+    st.title("EARLY DIABETES MELLITUS PREDICTION")
     st.subheader("Using Machine Learning")
 
     st.markdown('*Diabetes*')
